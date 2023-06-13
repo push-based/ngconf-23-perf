@@ -1,7 +1,7 @@
 # User Flow - Lighthouse Exercise
 
 The goal of this exercise is to introduce you to the brand new `measurement modes` recently integrated into
-the `lighthouse` tool. 
+the `lighthouse` tool.
 The new `measurement modes` let you record and analyze scripted user behavior as well as snapshots
 on running applications.
 You will learn how to use the new `measurement modes` `timespan` and `snapshot` `recorder` tool as well as run and analyze
@@ -45,7 +45,7 @@ with the tool.
 You might want to enable `DevTools throttling` which lets u control the applied throttling in your
 `DevTools` .
 
-![throttling](images/user-flow/lighthouse-throttling.png)
+![throttling](user-flow/lighthouse-throttling.png)
 
 > You also might want to try out multiple throttling settings per task to see how the different steps are behaving
 > differently on other devices
@@ -62,7 +62,7 @@ To run the audit, press the `Analyze page load` button.
 Make sure to run the audit with different throttling modes (network, cpu, mobile) to see a difference
 in the measured metrics.
 
-![lh-start-navigation](images/user-flow/lh-start-navigation.png)
+![lh-start-navigation](user-flow/lh-start-navigation.png)
 
 The `navigation` audit reports everything related to the bootstrap of your
 application and will give you good hints about how to improve:
@@ -75,7 +75,7 @@ application and will give you good hints about how to improve:
 
 You should see an output similar to the following screenshot.
 
-![navigation-report](images/user-flow/lh-navigation-report.png)
+![navigation-report](user-flow/lh-navigation-report.png)
 
 **Congratulations**, you have successfully created a (or multiple) `navigation` audits
 
@@ -87,9 +87,9 @@ navigation from `/list/popular` to `/list/top_rated`.
 Open the `lighthouse` tool in the `Chrome Dev Tools`, select the `timespan` mode
 and navigate to `/list/popular` on the locally served ng movies application.
 
-![lighthouse](images/user-flow/lighthouse-tool.png)
+![lighthouse](user-flow/lighthouse-tool.png)
 
-Prepare yourself for interacting with the application and 
+Prepare yourself for interacting with the application and
 press the `Start timespan` button to create a new timespan audit.
 
 Activate your browser window and navigate to the `top_rated` list by clicking
@@ -98,7 +98,7 @@ the item in the sidebar. End the recording after that.
 <details>
   <summary>Nav to Top Rated</summary>
 
-![nav-to-top_rated.gif](images/user-flow%2Fnav-to-top_rated.gif)
+![nav-to-top_rated.gif](user-flow%2Fnav-to-top_rated.gif)
 
 </details>
 
@@ -107,9 +107,9 @@ The `timespan` report will give you information about any measurements that are
 runtime related, e.g. the very important metric `INP` which tells you
 how long it takes until the application responds after an interaction was done.
 
-![nav-top_rated](images/user-flow/lh-nav-top_rated.png)
+![nav-top_rated](user-flow/lh-nav-top_rated.png)
 
-![lh-nav-top_rated2](images/user-flow/lh-nav-top_rated2.png)
+![lh-nav-top_rated2](user-flow/lh-nav-top_rated2.png)
 
 **Great!** You've created the first `timespan` report for our user journey.
 Inspect the audit results to get familiar with the reporting tool.
@@ -125,13 +125,13 @@ how the application behaves differently with throttling enabled.
 Let's complete our simple user flow with a `snapshot` audit. Being on the `top_rated` page,
 create a `snapshot` audit and analyze the current pages state.
 
-![start-snapshot](images/user-flow/lh-start-snapshot.png)
+![start-snapshot](user-flow/lh-start-snapshot.png)
 
 You should see a similar output as the following.
 The snapshot mode will provide you information about the current state of the application.
-This is usually done after a certain interaction was performed. 
+This is usually done after a certain interaction was performed.
 
-![snapshot-result](images/user-flow/lh-snapshot-result.png)
+![snapshot-result](user-flow/lh-snapshot-result.png)
 
 **Great**, now you are aware of how to create a complete user flow analysis by manually
 creating audits with all currently available measurement modes of the `lighthouse` tool.

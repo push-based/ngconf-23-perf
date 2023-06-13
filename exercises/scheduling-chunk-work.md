@@ -5,14 +5,14 @@ We learned about how we can use scheduling techniques in order to split up hard 
 pieces. Let's go ahead and split a piece of work into a new chunk!
 
 This exercise is about getting to know how to analyze the work executed by our application. You will
-use the `dev tools Performance Tab` in order to search for `long tasks` and measure the outcome of your 
+use the `dev tools Performance Tab` in order to search for `long tasks` and measure the outcome of your
 applied changes.
 By using the directives provided by the `@rx-angular/template` package, you will have an easy time
 splicing up the rendering work of your application.
 
 ## Improve AppShell
 
-Go ahead and do an analysis of the bootstrap performance of the application. 
+Go ahead and do an analysis of the bootstrap performance of the application.
 
 Serve the movies app and open your browser on the served `host:port`.
 
@@ -29,7 +29,7 @@ Also open the `Performance Tab` of the devtools.
 <details>
   <summary>Show Help</summary>
 
-![open-perfomance-tab](images/scheduling-chunk-work/open-perfomance-tab.png)
+![open-perfomance-tab](scheduling-chunk-work/open-perfomance-tab.png)
 
 </details>
 
@@ -39,7 +39,7 @@ Now run `Start profiling and reload page (Ctrl + Shift + E)` and inspect the rec
 <details>
   <summary>Show Help</summary>
 
-![start-profiling-and-reload](images/scheduling-chunk-work/start-profiling-and-reload.png)
+![start-profiling-and-reload](scheduling-chunk-work/start-profiling-and-reload.png)
 
 </details>
 
@@ -48,7 +48,7 @@ You should notice a huge `long task` in the beginning of the bootstrap phase, co
 <details>
   <summary>Show Help</summary>
 
-![long-task-bootstrap](images/scheduling-chunk-work/long-task-bootstrap.png)
+![long-task-bootstrap](scheduling-chunk-work/long-task-bootstrap.png)
 
 </details>
 
@@ -88,7 +88,7 @@ You should also notice the reduced workload on the first `long task` you've dete
 <details>
   <summary>Show Result</summary>
 
-![app-shell-chunk](images/scheduling-chunk-work/app-shell-chunk.png)
+![app-shell-chunk](scheduling-chunk-work/app-shell-chunk.png)
 
 </details>
 
@@ -110,9 +110,9 @@ of the application. Make sure to measure the outcome!
     (openedChange)="sideDrawerOpen = $event"
   >
   </ui-side-drawer>
-  
+
   <!-- other template -->
-  
+
 </ng-container>
 
 ```
@@ -139,7 +139,7 @@ It is probably connected to an `XHR Load` event and causes lots of `refreshView`
 <details>
   <summary>Show Help</summary>
 
-![ng-for-chunk](images/scheduling-chunk-work/ng-for-chunk.png)
+![ng-for-chunk](scheduling-chunk-work/ng-for-chunk.png)
 
 </details>
 
@@ -176,14 +176,14 @@ Do another performance recording of the movie-list and search for the chunked li
 <details>
   <summary>CPU Throttling</summary>
 
-![activate-cpu-throttle](images/scheduling-chunk-work/activate-cpu-throttle.png)
+![activate-cpu-throttle](scheduling-chunk-work/activate-cpu-throttle.png)
 
 </details>
 
 <details>
   <summary>Rx For Chunks</summary>
 
-![rx-for-chunking](images/scheduling-chunk-work/rx-for-chunking.png)
+![rx-for-chunking](scheduling-chunk-work/rx-for-chunking.png)
 
 </details>
 

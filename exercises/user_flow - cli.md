@@ -21,7 +21,7 @@ reports, together resembling a cohesive `user flow`.
 <details>
   <summary>Final Result</summary>
 
-![uf-final-audit](images/user-flow/lh-uf-final-audit.png)
+![uf-final-audit](user-flow/lh-uf-final-audit.png)
 
 </details>
 
@@ -112,11 +112,11 @@ const interactions: UserFlowInteractionsFn = async (
 ): Promise<any> => {
   const { flow, collectOptions, page } = ctx;
   const { url } = collectOptions;
-  
+
   await flow.navigate(url, {
     stepName: 'Navigate to popular page',
   });
-  
+
   // your script goes here
 
 };
@@ -152,7 +152,7 @@ module.exports = userFlowProvider;
 
 ## Configure browser
 
-If you encounter an issue with the browser installation, you can configure `puppeteer` to use 
+If you encounter an issue with the browser installation, you can configure `puppeteer` to use
 an already existing browser installation.
 
 You can also adjust the screen sizes and the viewport, if necessary.
@@ -224,7 +224,7 @@ A browser should open and run the initial `navigation` audit scripted in the exi
 
 When the audit is finished, you should be presented with an html report of the audit being performed.
 
-![lh-uf-report-1](images/user-flow/lh-uf-report-1.png)
+![lh-uf-report-1](user-flow/lh-uf-report-1.png)
 
 ## Timespan: popular -> top_rated
 
@@ -248,7 +248,7 @@ The methods from the flow object of interest are:
 * `endTimespan`
 * `snapshot`
 
-Start by scripting the first `timespan` by using the `flow.startTimespan` and `flow.endTimespan` 
+Start by scripting the first `timespan` by using the `flow.startTimespan` and `flow.endTimespan`
 methods.
 
 <details>
@@ -275,7 +275,7 @@ await flow.endTimespan();
 </details>
 
 Now that the `timespan` event is scaffolded, script the events needed to do
-the actual navigation. You probably want to use the `page.click()` method and 
+the actual navigation. You probably want to use the `page.click()` method and
 select the `a[href="/list/top_rated"]` link.
 
 If you have added a `data-test` attribute or any other identifier, you can use this instead.
@@ -319,20 +319,20 @@ screenshots.
 
 **Summary**
 
-![lh-uf-summary-2](images/user-flow/lh-uf-summary-2.png)
+![lh-uf-summary-2](user-flow/lh-uf-summary-2.png)
 
 **Select Navigation**
 
-![lh-uf-navigation-2](images/user-flow/lh-uf-navigation-2.png)
+![lh-uf-navigation-2](user-flow/lh-uf-navigation-2.png)
 
 **Use Breadcrumb**
 
-![lh-uf-timespan-2](images/user-flow/lh-uf-timespan-2.png)
+![lh-uf-timespan-2](user-flow/lh-uf-timespan-2.png)
 
 
 ## Snapshot
 
-Let's inspect 
+Let's inspect
 
 
 Insert a `flow.snapshot()` call as a last step of the script and execute the audit with `user-flow collect`.
@@ -352,7 +352,7 @@ flow.snapshot();
 
 **Nice**, execute the cli with `user-flow collect` and inspect the newly created report.
 
-You should now see a third audit being added to the summary. 
+You should now see a third audit being added to the summary.
 We are already getting to a usable state here. But let's keep on our efforts!
 
 ## Timespan: search movie
@@ -367,7 +367,7 @@ that does the magic for us.
 
 For this, open your browser at the movies application and the `recorder` tab in your `DevTools`.
 
-![recorder tool](images/user-flow/user-flow-recorder.png)
+![recorder tool](user-flow/user-flow-recorder.png)
 
 Now press the `Start a new recording` or `+` button to start a new recording.
 
@@ -378,13 +378,13 @@ Record a search for `e.g.` `Batman`, wait for the list being rendered and end th
 <details>
   <summary>Record a search</summary>
 
-![record-search-movie.gif](images/user-flow/record-search-movie.gif)
+![record-search-movie.gif](user-flow/record-search-movie.gif)
 
 </details>
 
 Your recording should look similar to the following screenshot. Make sure to test it out by using the `Replay` function.
 
-![record-search](images/user-flow/lh-uf-record-search.png)
+![record-search](user-flow/lh-uf-record-search.png)
 
 As you did last time, inspect the generated `selectors` and adjust them if needed.
 You may also want to introduce new steps as `waitForElement` or `waitForNavigation`.
@@ -394,7 +394,7 @@ If you are happy with your result, export the recorder script as json.
 > **Pro Tip:** add a `waitForElement` step which waits for one of the searched movies
 > use the `data-test` attribute to identify the element, e.g. `movie-card[data-test="272"]` for `Batman Begins`
 
-![recorder-export-to-json](images/user-flow/recorder-export-to-json.png)
+![recorder-export-to-json](user-flow/recorder-export-to-json.png)
 
 Move the generated json file to the movies app repository. I suggest the following path:
 `/user-flows/search-movies.json`.
@@ -404,7 +404,7 @@ need.
 
 Make sure to delete the two initially created steps that are of type `setViewport` and `navigate`.
 
-![remove-recorder-parts](images/user-flow/lh-uf-remove-recorder-parts.png)
+![remove-recorder-parts](user-flow/lh-uf-remove-recorder-parts.png)
 
 Below you find a working example if you are experiencing any issues with the process.
 
@@ -503,11 +503,11 @@ You now be able to see another audit added to the report, representing the recor
 
 **Summary**
 
-![summary](images/user-flow/lh-uf-summary-3.png)
+![summary](user-flow/lh-uf-summary-3.png)
 
 **Detail**
 
-![user-recording](images/user-flow/lh-uf-user-recording-3.png)
+![user-recording](user-flow/lh-uf-user-recording-3.png)
 
 ## Timespan: navigate to detail & final snapshot
 
@@ -516,7 +516,7 @@ that selects a movie from the list and navigates to its detail page.
 
 You should now be aware of how add a new `timespan`. Add a new timespan called `Select A Movie`.
 You can choose to handpick a movie or just click the first one available.
-You can also choose to create a recording and let run the `json` file or handcraft it 
+You can also choose to create a recording and let run the `json` file or handcraft it
 with javascript.
 
 The idea is to click e.g. `movie-card:first-child` and wait for the `div.grid--item.gradient` to appear at the screen.
@@ -559,7 +559,7 @@ flow.snapshot();
 
 </details>
 
-**Congratulations**, you have successfully implemented a real world usable user flow. 
+**Congratulations**, you have successfully implemented a real world usable user flow.
 Please inspect the final outcome and be **proud of yourself**! You have built a really nice piece of
 software :claps:
 
@@ -619,7 +619,7 @@ await flow.snapshot();
 
 </details>
 
-![uf-final-audit](images/user-flow/lh-uf-final-audit.png)
+![uf-final-audit](user-flow/lh-uf-final-audit.png)
 
 ## Bonus: Battletest your improvements
 

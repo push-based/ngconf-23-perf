@@ -13,17 +13,17 @@ Open your browser to any movie-list page and start the dev tools with `F12` or `
 
 Do a recording of the animation and inspect the flame charts.
 
-![start-recording](images/dom-access/start-recording.png)
+![start-recording](dom-access/start-recording.png)
 
 **Tilt Animation**
-![tilt-animation](images/dom-access/tilt-animation.gif)
+![tilt-animation](dom-access/tilt-animation.gif)
 
 When analysing the flame charts, you should notice that there is a `layout` task involved
-when querying for `getBoundingClientRect` or `clientWidth`. 
+when querying for `getBoundingClientRect` or `clientWidth`.
 
 > The re-layout doesn't happen all the time. It only happens if the layout was invalidated before (e.g. infinite scroller loaded more movies, in some cases after changing the zoom level). The `recalculate` style task is easier to track.
 
-![getBoundingClientRect](images/dom-access/getBoundingClientRect.png)
+![getBoundingClientRect](dom-access/getBoundingClientRect.png)
 
 Your task now is to improve the performance of the animation by removing the need for layouting at all.
 
@@ -80,11 +80,11 @@ Open your browser to any movie-list page and start the dev tools with `F12` or `
 
 Do a recording of the scroll event and inspect the flame charts.
 
-![scroll event](images/dom-access/scroll.gif)
+![scroll event](dom-access/scroll.gif)
 
 You should be able to spot a pattern that indicates layout thrashing caused by reading the `scrollHeight` property in javascript.
 
-![scrollTop recalc styles](images/dom-access/scrollTop.png)
+![scrollTop recalc styles](dom-access/scrollTop.png)
 
 Your task is to get rid of the layout thrashing. The current implementation relies on querying positional and geometrical information
 from DOM elements on each `scroll` event. Use the `IntersectionObserver` to implement a push-based architecture which gives you
@@ -120,30 +120,30 @@ when scrolling. The scroll listener as well as the layout trashing shouldn't be 
 
 Instead, you should find tasks that are labelled as `compute intersections`.
 
-![compute-intersections](images/dom-access/compute-intersections.png)
+![compute-intersections](dom-access/compute-intersections.png)
 
 
 ## Compositor only sidebar
 
 So far we've avoided implemented solutions that avoid javascript DOM Access by using observers to get
 push notifications about DOM changes.
-Yet, these strategies don't apply to every problem. In this exercise we will learn how to improve the 
+Yet, these strategies don't apply to every problem. In this exercise we will learn how to improve the
 performance of css animations by using compositor only properties.
 
 Start off by measuring the current state of the sidebar slide animation.
 
 **Animation**
-![slide-animation](images/dom-access/slide-animation.gif)
+![slide-animation](dom-access/slide-animation.gif)
 
 You should notice two things when analysing the performance recording
 
 **1. Layout Shift**
-![sidebar-animation-layout-shift](images/dom-access/sidebar-animation-layout-shift.png)
+![sidebar-animation-layout-shift](dom-access/sidebar-animation-layout-shift.png)
 
 While the animation is ongoing, you'll notice a lot of `layout shifts` being reported by the chrome dev tools.
 
 **2. Layout Thrashing**
-![slide-animation-layout](images/dom-access/slide-animation-layout.png)
+![slide-animation-layout](dom-access/slide-animation-layout.png)
 
 The animation causes multiple consequent `layout` tasks while it is ongoing.
 
@@ -153,8 +153,8 @@ by animating the `left` property from `-250px` to `0`. This moves the sidebar in
 Implement your changes in `side-drawer.component.scss` as this is the place where the animation is implemented originally.
 
 > `left` is a layout property, thus causing layout shifts and layout tasks for the browser
-> 
-> `transform: translateX` is also capable of moving things on the `X` axis, but is a `compositor only` propery 
+>
+> `transform: translateX` is also capable of moving things on the `X` axis, but is a `compositor only` propery
 
 <details>
   <summary>Show Help</summary>
@@ -191,9 +191,9 @@ the outcome again.
 You should see both before mentioned issues being gone.
 
 **1. No layout shifts**
-![slide-animation-no-layout-shift](images/dom-access/slide-animation-no-layout-shift.png)
+![slide-animation-no-layout-shift](dom-access/slide-animation-no-layout-shift.png)
 
 **2. No layout task**
-![slide-animation-no-layout](images/dom-access/slide-animation-no-layout.png)
+![slide-animation-no-layout](dom-access/slide-animation-no-layout.png)
 
 

@@ -48,20 +48,20 @@ animation.
 When analyzing the flame charts, you should notice two things.
 
 **1. Long Task for click event listener**
-![long-task-bar-animation](images/dom-access/long-task-bar-animation.png)
+![long-task-bar-animation](dom-access/long-task-bar-animation.png)
 
 The click event listener shows a long task because the task took longer than 50ms
 to execute.
 
 **2. Forced Reflow**
-![forced-reflow](images/dom-access/forced-reflow.png)
+![forced-reflow](dom-access/forced-reflow.png)
 
 The dev tools will also give you warnings about potential performance bottlenecks.
 You should see multiple occurrences of `Forced Reflow` warnings.
 
 ## Remove forced reflow
 
-Inspect the code of `ForcedReflowComponent` as this is the place where the 
+Inspect the code of `ForcedReflowComponent` as this is the place where the
 animation is implemented.
 
 Take a look at the `animateSlow` method and identify the cause of the forced reflow.
@@ -93,7 +93,7 @@ animateFast(): void {
     const label: HTMLElement = nativeElement.querySelector('.label') as HTMLElement;
     label.style.fontSize = fontSize;
   });
-  
+
   // layout is now stable
   // determine largest label (read)
   this.menuItems.forEach(item => {
@@ -101,7 +101,7 @@ animateFast(): void {
     const label: HTMLElement = nativeElement.querySelector('.label') as HTMLElement;
     largest = Math.max(largest, (label.firstChild as HTMLElement).offsetWidth + 5);
   });
-  
+
   // align bars to largest label (write)
   this.menuItems.forEach(item => {
     const nativeElement = item.nativeElement;
@@ -118,7 +118,7 @@ view the flame charts.
 
 You should notice that both, the `long task` as well as the `forced reflows` are gone.
 
-![no-forced-reflow](images/dom-access/no-forced-reflow.png)
+![no-forced-reflow](dom-access/no-forced-reflow.png)
 
 ## Bonus: Super fast calculation with compositor only properties
 
@@ -142,7 +142,7 @@ Implement your changes in the `animateSuperFast` method of the `ForcedReflowComp
 animateSuperFast(): void {
     const start = performance.now();
     let largest = 0;
-    
+
     this.fat = !this.fat;
     // set scale instead of fontSize
     const scale = this.fat ? 1.25 : 1;
@@ -177,6 +177,6 @@ of the runtime performance again.
 If you were successful, you should see that the layout task is gone from the animation.
 The result should look similar to the one below
 
-**No Layout Task**  
-![superfast-compositor-only](images/dom-access/superfast-compositor-only.png)
+**No Layout Task**
+![superfast-compositor-only](dom-access/superfast-compositor-only.png)
 
