@@ -1,0 +1,20 @@
+<ng-container *ngIf="movies$ | async as movies; else: loader">
+
+  <movie-list
+    *ngIf="movies && movies.length > 0; else: elseTmpl"
+    [movies]="movies">
+  </movie-list>
+
+  <div (elementVisible)="paginate$.next($event)"></div>
+
+  <ng-template #elseTmpl>
+    <div>Sorry, nothing found bra!</div>
+  </ng-template>
+
+
+</ng-container>
+
+
+<ng-template #loader>
+  <div class="loader"></div>
+</ng-template>

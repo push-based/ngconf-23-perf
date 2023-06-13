@@ -1,0 +1,9 @@
+.movie-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(10rem, 25rem));
+  gap: 4rem 2rem;
+  place-content: space-between space-evenly;
+  align-items: start;
+  margin: 4rem 0;
+  position: relative;
+}

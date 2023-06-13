@@ -1,0 +1,9 @@
+<input #searchInput (blur)="onTouched()" (input)="searchTerm$.next(searchInput.value)">
+<div class="results" *ngIf="movies$ | async as movies">
+  <button class="movie-result"
+          (click)="selectMovie(movie)"
+          *ngFor="let movie of movies">
+    <img [src]="movie.poster_path | movieImage" width="35" [alt]="movie.title">
+    <span>{{ movie.title }}</span>
+  </button>
+</div>

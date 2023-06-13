@@ -1,0 +1,18 @@
+<div class="movie-card"
+     [tilt]="40"
+     (click)="movieClicked()">
+
+  <img class="movie-image"
+       [alt]="movie.title"
+       [src]="movie.poster_path | movieImage">
+
+  <div class="movie-card-content">
+    <div class="movie-card-title">
+      {{ movie.title | uppercase }}
+    </div>
+    <div class="movie-card-rating">
+      <ui-star-rating [rating]="movie.vote_average"></ui-star-rating>
+    </div>
+  </div>
+  <div class="movie-weight" *ngFor="let div of divs"></div>
+</div>

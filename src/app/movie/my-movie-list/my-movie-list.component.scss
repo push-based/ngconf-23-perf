@@ -1,0 +1,53 @@
+:host {
+  padding: 0 1rem;
+  display: block;
+}
+
+form {
+  width: 500px;
+  .form-group {
+    margin-bottom: 1rem;
+  }
+}
+
+.form-group {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.button-group {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+
+  button:first-child {
+    margin-right: .5rem;
+  }
+}
+
+.movie-item {
+  padding: 1rem 0.5rem;
+  display: flex;
+  font-size: var(--text-lg);
+  align-items: center;
+
+  .btn {
+    overflow: hidden;
+  }
+}
+
+.movie-title {
+  width: 125px;
+}
+
+.error {
+  color: darkred;
+  font-size: var(--text-sm);
+}
+
+textarea.ng-touched.ng-invalid,
+input.ng-touched.ng-invalid {
+  border: 2px solid darkred;
+  color: darkred;
+}

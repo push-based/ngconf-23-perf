@@ -1,0 +1,35 @@
+.movie- {
+  &image {
+    display: block;
+    width: 100%;
+    height: auto;
+  }
+}
+
+.movie-card {
+  transition: box-shadow .15s cubic-bezier(.4,0,.2,1) 0s,
+    transform .15s cubic-bezier(.4,0,.2,1) 0s;
+
+  .movie-weight {
+    color: blue;
+  }
+}
+
+.movie-card:hover {
+  box-shadow: 0 0 7px 4px rgba(0, 0, 0, .6);
+  font-size: 1.1em;
+
+  .movie-weight {
+    font-size: 1.1em;
+  }
+}
+
+.movie-card-content {
+  text-align: center;
+  padding: 1.5rem 3rem;
+  font-size: 1.5rem;
+}
+
+.movie-card-title {
+  font-size: 2rem;
+}

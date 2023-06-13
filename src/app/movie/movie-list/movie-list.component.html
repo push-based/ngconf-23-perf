@@ -1,0 +1,8 @@
+<div class="movie-list" #movieList>
+  <movie-card
+    (selected)="navToDetail($event)"
+    [movie]="movie"
+    *ngFor="let movie of movies">
+
+  </movie-card>
+</div>
