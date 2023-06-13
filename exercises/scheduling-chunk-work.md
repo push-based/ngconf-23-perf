@@ -77,7 +77,7 @@ provideRouter(routes,
 // app.component.ts
 export class AppComponent {
   constructor(router: Router) {
-    router.navigate(['']);
+    router.navigateByUrl(window.location.pathname);
   }
 }
 ```
