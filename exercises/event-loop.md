@@ -11,7 +11,7 @@ You can use this plain javascript example as a starting point for your exercise.
 
 > please fork the project :-)
 
-![img.png](images/event-loop/event-loop-exercise.png)
+![img.png](event-loop/event-loop-exercise.png)
 
 
 <details>

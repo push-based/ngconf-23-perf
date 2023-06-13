@@ -21,7 +21,7 @@ a layout inside it. Click the `ui-search-bar` component in order to trigger its 
 As it is expanding by changing its width, we can be sure the browser has to relayout.
 
 **searchbar animation**
-![searchbar-animation](images/css-contain/searchbar-animation.gif)
+![searchbar-animation](css-contain/searchbar-animation.gif)
 
 Open the devtools with `F12` or `Ctrl + Shift + I` and open the `Performance Tab`.
 Create a recording of the searchbar animation an analyse the created profile.
@@ -30,12 +30,12 @@ You should see a bunch `layout` tasks being executed while the animation is ongo
 Inspect a single layout task in order to see its details.
 The following metrics are important:
 * runtime in ms
-* amount of affected DOM Nodes 
+* amount of affected DOM Nodes
 * layout root
 
 You should see a similar result to the following:
 
-![ui-toolbar-layout](images/css-contain/ui-toolbar-layout.png)
+![ui-toolbar-layout](css-contain/ui-toolbar-layout.png)
 
 As you can see, the layout root is `document` and it had to check > `700` nodes in order to find
 out what has to get relayouted and what doesn't.
@@ -74,17 +74,17 @@ dimensions and go with `contain: content`. Either way, implement your changes in
   @include isMobile {
     width: 100vw;
   }
-  
+
 }
 ```
 
 </details>
 
-When you've finished the implementation, please repeat the measurements from before. Inspect the summary of the 
+When you've finished the implementation, please repeat the measurements from before. Inspect the summary of the
 `layout` task again. You should now notice the `Layout` root being set to the set boundary.
 Furthermore, the execution time dropped dramatically as well as the amount of inspected dom nodes.
 
-![search-bar-layout-contained](images/css-contain/search-bar-layout-contained.png)
+![search-bar-layout-contained](css-contain/search-bar-layout-contained.png)
 
 ## Contain Layout for `ui-sidedrawer`
 
@@ -95,7 +95,7 @@ As we want to make sure the layout will be contained inside of `ui-sidedrawer`, 
 a layout inside it. Hover over any navigation item.
 As it is setting its font-weight to `bold`, we can be sure the browser has to relayout.
 
-![sidebar-layout](images/css-contain/sidebar-layout.gif)
+![sidebar-layout](css-contain/sidebar-layout.gif)
 
 You should notice a `layout` task being executed whenever you hover an item.
 Inspect a single layout task in order to see its details.
@@ -106,7 +106,7 @@ The following metrics are important:
 
 You should see a similar result to the following:
 
-![sidebar-layout](images/css-contain/sidebar-layout.png)
+![sidebar-layout](css-contain/sidebar-layout.png)
 
 As you can see, the layout root is `document` and it had to check > `700` nodes in order to find
 out what has to get relayouted and what doesn't.
@@ -140,7 +140,7 @@ dimensions and go with `contain: content`. Either way, implement your changes in
 .side-drawer {
   /* other stuff */
   contain: content;
-  height: 100vh;  
+  height: 100vh;
 }
 ```
 
@@ -150,7 +150,7 @@ When you've finished the implementation, please repeat the measurements from bef
 `layout` task again. You should now notice the `Layout` root being set to the configured boundary.
 Furthermore, the execution time dropped dramatically as well as the amount of inspected dom nodes.
 
-![side-drawer-layout-contained](images/css-contain/side-drawer-layout-contained.png)
+![side-drawer-layout-contained](css-contain/side-drawer-layout-contained.png)
 
 ## Native Virtual Scrolling for MovieList
 
@@ -160,10 +160,10 @@ Anyway, scrollable growing containers are not going to benefit from this solutio
 it contains, the higher the layouting effort will be for the browser.
 
 A common solution to this problem is to use `virtual-scrolling`. For dynamic masonry/grid-like
-layouts you will have a hard time finding a proper javascript based solution, though. 
+layouts you will have a hard time finding a proper javascript based solution, though.
 However, there are still options to improve heavy content containers and reduce its layouting cost.
 
-Start off by measuring the runtime performance of any movie-list with **small contents** & **large contents**. 
+Start off by measuring the runtime performance of any movie-list with **small contents** & **large contents**.
 The movie list grows when you scroll down to trigger the pagination.
 
 We want to do two measurements for comparison, one with a small list (no pagination), one with a large list (> 5 pages loaded).
@@ -175,13 +175,13 @@ immediately spot the difference in terms of executed work. Below you find screen
 example measurements. You should see similar results.
 
 **Small List**
-![content-visibility-initial-small](images/css-contain/content-visibility-initial-small.png)
+![content-visibility-initial-small](css-contain/content-visibility-initial-small.png)
 
 **Large List**
-![content-visibility-initial-large](images/css-contain/content-visibility-initial-large.png)
+![content-visibility-initial-large](css-contain/content-visibility-initial-large.png)
 
 **Comparison**
-![content-visibility-initial-comparison](images/css-contain/content-visibility-initial-comparison.png)
+![content-visibility-initial-comparison](css-contain/content-visibility-initial-comparison.png)
 
 Now it's your task to implement a css based solution to improve the performance even in situations
 where the user has loaded a lot of movies to the DOM.
@@ -191,7 +191,7 @@ native virtual-scrolling.
 
 > Tip: don't forget about `contain-intrinsic-size` :)
 
-Repeat the measurements from before with a small and a large list. 
+Repeat the measurements from before with a small and a large list.
 
 If you've done right, you should notice that the amount of DOM Nodes isn't affecting the runtime
 performance anymore.
@@ -200,6 +200,6 @@ This is the case because every item out of viewport will be detached from the Re
 The browser will even give a hint about that. Try to select an out-of-viewport item via the
 `Elements` panel in the dev tools.
 
-![contain-visibility-detached-from-rendering](images/css-contain/contain-visibility-detached-from-rendering.png)
+![contain-visibility-detached-from-rendering](css-contain/contain-visibility-detached-from-rendering.png)
 
 Well done! You've successfully implemented a native virtual scrolling solution :-)

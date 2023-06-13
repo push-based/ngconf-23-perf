@@ -60,7 +60,7 @@ Great, you can verify your changes by inspecting the network traffic of your app
 To do so, open "Network" tab in the Chrome Dev tools. Make sure to have `disable cache` checked.
 You should see that the requests for the preloaded resources are happening at a very early stage in the waterfall.
 
-![preload-logo-and-launcher](images/network/preload-logo-and-launcher.png)
+![preload-logo-and-launcher](network/preload-logo-and-launcher.png)
 
 Please also note the change in priority when you remove the `as` attribute.
 
@@ -95,19 +95,19 @@ Great, you can verify your changes by inspecting the network traffic of your app
 To do so, open "Network" tab in the Chrome Dev tools. Make sure to have `disable cache` checked.
 You should see that the request for the prefetched resource is happening right after the javascript bundles are loaded.
 
-![prefetch-no-poster-available](images/network/prefetch-no-poster-available.png)
+![prefetch-no-poster-available](network/prefetch-no-poster-available.png)
 
 ## Prefetch http resources as early as possible
 
 Until now, we used native browser features in order to preload/prefetch **static** resources in an early stage.
 But what about dynamic resources or resources where we need authentication upfront?
 Let's first inspect current state.
-Right now the network requests needed to display any meaningful data to the user are tied to component lifecycles. 
+Right now the network requests needed to display any meaningful data to the user are tied to component lifecycles.
 This is in general a very bad practice as it is the latest point in time when we actually can execute scripts.
 
 We can observe this behavior by looking from two different angles, the code and the performance analysis.
 
-Start by looking at the code and go to the `AppShellComponent`. You should find a code snippet that requests the `genre` data from the 
+Start by looking at the code and go to the `AppShellComponent`. You should find a code snippet that requests the `genre` data from the
 `MovieService` and bind it to an `async` pipe in the template.
 
 <details>
@@ -144,13 +144,13 @@ This will refresh the page and provide you the performance analysis data afterwa
 Go to the `Network` section and search for the request made to
 `https://api.themoviedb.org/3/genre/movie/list`. Take a look at the timing when it is queued.
 
-By combining this view with the flame-chart view, you should be able to pinpoint the exact 
+By combining this view with the flame-chart view, you should be able to pinpoint the exact
 location where the request is made in the code: `AppShellComponentTemplate`.
 
-![genre-request-template](images/network/genre-request-template.png)
+![genre-request-template](network/genre-request-template.png)
 
 As we now found out where the problem is, let's find a solution.
-Your goal is to provide and implement an `APP_INITIALIZER` where we 
+Your goal is to provide and implement an `APP_INITIALIZER` where we
 will pre-fetch the genre data of the `MovieService`.
 
 For this, we first need to touch the `MovieService` as well as the `AppShellComponent`.
@@ -234,7 +234,7 @@ Repeat the analysis process from before by doing a performance profile of a refr
 You should now see the timing of the network request has moved from `AppShellComponentTemplate` to
 `bootstrap`, very nice job!!
 
-![genre-request-initializer](images/network/genre-request-initializer.png)
+![genre-request-initializer](network/genre-request-initializer.png)
 
 ## Cancel not needed requests
 
@@ -246,16 +246,16 @@ Now, inspect the `XHR` requests being made while you navigate between different 
 
 You should notice that no request is ever cancelled even though you probably don't need the result anymore.
 
-![requests not cancelled](images/network/requests-not-cancelled.png)
+![requests not cancelled](network/requests-not-cancelled.png)
 
 We can optimise this behavior by using the `rxjs switchMap` operator.
 
 Your task is now to implement business logic that will cancel ongoing requests made to either `genre` or `movie/list/{category}`.
 The requests are currently handled in `MovieListPageComponent`. This will be the component you need to introduce changes in order to solve this task.
 
-When you've finished your task, do the network analysis again. You should now see the requests being marked as `cancelled`. 
+When you've finished your task, do the network analysis again. You should now see the requests being marked as `cancelled`.
 
-![cancelled requests](images/network/cancelled-requests.png)
+![cancelled requests](network/cancelled-requests.png)
 
 <details>
   <summary>Show Help</summary>

@@ -39,11 +39,11 @@ Confirm your feeling by creating a recording of the navigation event and investi
 For this, open the dev tools with `F12` or `Ctrl + Shift + I` and go to the `Performance Tab`.
 Hit the `record` button and do the navigation. When you've finished, stop the recording by again hitting the record button.
 
-![start-recording](images/scheduling-prioritize/start-recording.png)
+![start-recording](scheduling-prioritize/start-recording.png)
 
 You should see a result similar to the following.
 
-![initial-state](images/scheduling-prioritize/initial-state-long-task.png)
+![initial-state](scheduling-prioritize/initial-state-long-task.png)
 
 ## Make rendering unblocking
 
@@ -84,9 +84,9 @@ event much faster.
 
 Your measurement should be comparable to this example:
 
-![chunked-example](images/scheduling-prioritize/chunked-example.png)
+![chunked-example](scheduling-prioritize/chunked-example.png)
 
-Well done! 
+Well done!
 
 ## Prioritize work
 
@@ -100,7 +100,7 @@ this means the `sidebar` will be rendered first, the `header` second, `content` 
 In order to achieve the goal of rendering the `content` first, we can make use of the concept of `prioritization`.
 
 > Tip: Priorities are abstracted by the concept of `RenderStrategies`
-> 
+>
 > 1 - `immediate`
 > 2 - `userBlocking`
 > 3 - `normal`
