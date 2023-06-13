@@ -10,7 +10,7 @@ applied changes.
 By using the directives provided by the `@rx-angular/template` package, you will have an easy time
 splicing up the rendering work of your application.
 
-## Improve AppShell
+## Improve Bootstrap
 
 Go ahead and do an analysis of the bootstrap performance of the application. 
 
@@ -43,7 +43,68 @@ Now run `Start profiling and reload page (Ctrl + Shift + E)` and inspect the rec
 
 </details>
 
-You should notice a huge `long task` in the beginning of the bootstrap phase, connected to `AppShellComponent`
+
+Chunk the bootstrap phase into multiple chunks:
+
+1. Schedule Bootstrapping in `main.ts`  
+
+<details>
+  <summary>Show Help</summary>
+
+```typescript
+// main.ts
+setTimeout(
+  () => bootstrapApplication(AppComponent, appConfig)
+    .catch((err) => console.error(err))
+);
+```
+
+</details>
+
+2. Schedule initial navigation in `app.config.ts` and `app.component.ts`  
+
+<details>
+  <summary>Show Help</summary>
+
+```typescript
+// app.config.ts
+provideRouter(routes,
+  withDisabledInitialNavigation()
+)
+```
+
+```typescript
+// app.component.ts
+export class AppComponent {
+  constructor(router: Router) {
+    router.navigate(['']);
+  }
+}
+```
+
+</details>
+
+3. Schedule initialization phase in `app.component.ts`
+
+<details>
+  <summary>Show Help</summary>
+
+```typescript
+// app.config.ts
+{
+  provide: APP_INITIALIZER,
+    useFactory: () => () => new Promise((resolve) => setTimeout(resolve)),
+  multi: true,
+},
+```
+
+</details>
+
+
+![bootstrap-chunk](images/scheduling-chunk-work/chunk-ng-bootstrap.png)
+
+## Improve AppShell
+Remeasure again! You should notice a huge `long task` in the beginning of the bootstrap phase, connected to `AppShellComponent`
 
 <details>
   <summary>Show Help</summary>
